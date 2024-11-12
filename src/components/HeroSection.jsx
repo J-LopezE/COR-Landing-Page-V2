@@ -36,12 +36,12 @@ export const HeroSection = () => {
         </div>
         <motion.div 
           className="md:w-1/2"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{  scale: 0.8 }}
+          animate={{  scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-blue-400 rounded-lg filter blur-2xl opacity-50 transform rotate-6"></div>
+            <div className="absolute inset-0  rounded-lg filter blur-2xl  transform rotate-6"></div>
             <img src={ImgServer} alt="Innovación Tecnológica" className="rounded-lg shadow-2xl" />
           </div>
         </motion.div>
