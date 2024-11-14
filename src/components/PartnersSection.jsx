@@ -3,7 +3,7 @@ import { AnimatedSection } from "./AnimatedSection.jsx";
 
 export const PartnersSection = () => {
   return (
-    <AnimatedSection id="socios" className="py-20 ">
+    <AnimatedSection id="socios" className="py-20 bg-blue-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900">Socios Estratégicos</h2>
         <div className="flex flex-wrap justify-center items-center gap-12">

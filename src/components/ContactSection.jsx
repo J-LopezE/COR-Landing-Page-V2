@@ -3,6 +3,8 @@ import { Button, Input, Textarea } from "@nextui-org/react";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import DOMPurify from 'dompurify'; 
+import { Alert, AlertTitle, CircularProgress } from '@mui/material'; 
+
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -17,6 +19,10 @@ export const ContactSection = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [showAlert, setShowAlert] = useState(false); // Para manejar las alertas
+  const [alertMessage, setAlertMessage] = useState(""); // Mensaje de la alerta
+  const [isSubmitting, setIsSubmitting] = useState(false); // Estado de envío
+  const [loading, setLoading] = useState(false); // Estado de "loading" mientras se envía el formulario
 
   const sanitizeInput = (input) => {
     return DOMPurify.sanitize(input); 
@@ -44,16 +50,46 @@ export const ContactSection = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
-      // Enviar formulario
-      console.log("Form submitted", formState);
-      setFormState({ name: "", email: "", message: "" });
+      setLoading(true); // Iniciamos el estado de loading
+      setIsSubmitting(true); // Marcamos que el formulario está siendo enviado
+      setAlertMessage("Enviando..."); // Mostramos alerta de "Enviando"
+
+      try {
+        // Enviar el formulario a FormSubmit
+        const response = await fetch("https://formsubmit.co/ajax/jorgeisrael.lopez@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formState),
+        });
+
+        if (response.ok) {
+          setAlertMessage("¡Mensaje Enviado!"); // Mensaje de éxito
+          setShowAlert(true);
+          setFormState({ name: "", email: "", message: "" }); // Limpiar el formulario
+
+          // Ocultar la alerta después de 5 segundos
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 5000); // La alerta desaparecerá después de 5 segundos
+        } else {
+          setAlertMessage("Hubo un error al enviar el mensaje.");
+          setShowAlert(true); // Mostrar alerta de error
+        }
+      } catch (error) {
+        setAlertMessage("Hubo un error al enviar el mensaje.");
+        setShowAlert(true); // Mostrar alerta de error
+      } finally {
+        setLoading(false); // Regresar al estado original de "loading"
+        setIsSubmitting(false); // Regresar al estado de formulario normal
+      }
     } else {
-      // Mostrar los errores
       setErrors(newErrors);
     }
   };
@@ -194,12 +230,30 @@ export const ContactSection = () => {
                 size="lg"
                 className="w-full mt-4"
                 endContent={<Send className="ml-2" size={17} />}
+                disabled={loading} // Deshabilitar el botón si se está enviando el mensaje
               >
-                Enviar mensaje
+                {loading ? "Enviando..." : "Enviar mensaje"}
               </Button>
             </form>
           </motion.div>
         </div>
+
+        {/* Alerta de carga o éxito */}
+        {showAlert && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            {loading ? (
+              <Alert severity="info" className="text-center bg-blue-600 w-1/2">
+                <AlertTitle>Enviando...</AlertTitle>
+                <CircularProgress color="inherit" />
+              </Alert>
+            ) : (
+              <Alert severity="success" className="text-center bg-green-600 w-1/2">
+                <AlertTitle>{alertMessage}</AlertTitle>
+                Tu mensaje se ha enviado correctamente. Nos pondremos en contacto pronto.
+              </Alert>
+            )}
+          </div>
+        )}
 
         <motion.div
           className="mt-6 text-center text-sm mr-5"

@@ -4,10 +4,11 @@ import { AnimatedSection } from "./AnimatedSection.jsx";
 import LogoCapama from "../img/capama_r.png";
 import LogoCe from "../img/ceenergy.png";
 import LogoAyuntamiento from "../img/LOGOCENTRO.png";
+import LogoCortinas from "../img/cortinas.jpg";
 
 export const ProjectsSection = () => {
   return (
-    <AnimatedSection className="py-20 ">
+    <AnimatedSection className="py-20 bg-blue-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900">
         Empresas Líderes que Confían en Nuestros Servicios
@@ -15,7 +16,7 @@ export const ProjectsSection = () => {
         <div className="flex flex-wrap justify-center items-center gap-12">
           <motion.div
             whileHover={{
-              scale: 1.9, 
+              scale: 1.7, 
               transition: { type: "spring", stiffness: 200, damping: 20 },
             }}
             className="w-56 h-48 p-4 flex justify-center items-center"
@@ -31,7 +32,7 @@ export const ProjectsSection = () => {
 
           <motion.div
             whileHover={{
-              scale: 1.15,  
+              scale: 1.7,  
               transition: { type: "spring", stiffness: 200, damping: 20 },
             }}
             className="w-48 h-48 p-4 flex justify-center items-center"
@@ -47,7 +48,7 @@ export const ProjectsSection = () => {
 
           <motion.div
             whileHover={{
-              scale: 1.15,  
+              scale: 1.7,  
               transition: { type: "spring", stiffness: 200, damping: 20 },
             }}
             className="w-40 h-48 p-4 flex justify-center items-center"
@@ -63,14 +64,14 @@ export const ProjectsSection = () => {
 
           <motion.div
             whileHover={{
-              scale: 1.15,  
+              scale: 1.7,  
               transition: { type: "spring", stiffness: 200, damping: 20 },
             }}
-            className="w-56 h-48 p-4 flex justify-center items-center"
+            className="w-52  h-48 p-4 flex justify-center items-center"
           >
             <div className="bg-white/60 backdrop-blur-sm p-6 rounded-lg shadow-lg transition-all duration-300 flex justify-center items-center">
               <img
-                src="/placeholder-logo.svg"
+                src={LogoCortinas}
                 alt="Logo de Socio 4"
                 className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
               />
