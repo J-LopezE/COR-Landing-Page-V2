@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Image } from "@nextui-org/react";
 import { motion } from "framer-motion";
-import ImgServer from "../img/server.jpg";
+import ImgServer from "../img/server.webp";
 
 export const HeroSection = () => {
   return (

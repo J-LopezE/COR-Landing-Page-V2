@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection.jsx";
-import LogoCapama from "../img/capama_r.png";
-import LogoCe from "../img/ceenergy.png";
-import LogoAyuntamiento from "../img/LOGOCENTRO.png";
-import LogoCortinas from "../img/cortinas.jpg";
+import LogoCapama from "../img/capama_r.webp";
+import LogoCe from "../img/ceenergy.webp";
+import LogoAyuntamiento from "../img/LOGOCENTRO.webp";
+import LogoCortinas from "../img/cortinas.webp";
 
 export const ProjectsSection = () => {
   return (
