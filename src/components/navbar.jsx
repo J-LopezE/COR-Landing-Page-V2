@@ -11,7 +11,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
 } from "@nextui-org/react";
-import Logo from "../../src/img/logocoruru.jpg";
+import Logo from "../../src/img/logocoruru.webp";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -192,7 +192,7 @@ export function Navbar() {
       </NavbarContent>
 
       <NavbarItem className="flex items-center">
-        <button onClick={toggleTheme}>
+        <button onClick={toggleTheme} aria-label="Toggle theme">
           {isDark ? (
             <Sun className="h-6 w-6" variant="shadow" />
           ) : (
