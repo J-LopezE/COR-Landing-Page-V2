@@ -14,18 +14,18 @@ function Home() {
         </div>
         <div
           id="sobre-nosotros"
-          className="row flex-nowrap overflow-auto"
+          className="row flex-nowrap overflow-auto bg-blue-100"
         >
           <AboutSection />
         </div>
 
-        <div id="clientes" className="row flex-nowrap overflow-auto">
+        <div id="clientes" className="row flex-nowrap overflow-auto bg-blue-100">
           <ProjectsSection />
         </div>
-        <div id="servicios" className="row flex-nowrap overflow-auto ">
+        <div id="servicios" className="row flex-nowrap overflow-auto bg-blue-100 ">
           <ServicesSection />
         </div>
-        <div id="socios" className="row flex-nowrap overflow-auto ">
+        <div id="socios" className="row flex-nowrap overflow-auto bg-blue-100">
           <PartnersSection />
         </div>
         <div id="contacto" className="row flex-nowrap overflow-auto">

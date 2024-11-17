@@ -4,7 +4,7 @@ import { AnimatedSection } from "./AnimatedSection.jsx";
 
 export const AboutSection = () => {
   return (
-    <AnimatedSection className="py-20 bg-blue-100">
+    <AnimatedSection className="py-20">
       <div
         id="sobre-nosotros"
         className="container mx-auto px-4 w-full max-w-full"

@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Send } from "lucide-
 import { motion } from "framer-motion";
 import DOMPurify from 'dompurify'; 
 import { Alert, AlertTitle, CircularProgress } from '@mui/material'; 
+import { useTheme } from "next-themes";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -23,6 +24,8 @@ export const ContactSection = () => {
   const [alertMessage, setAlertMessage] = useState(""); // Mensaje de la alerta
   const [isSubmitting, setIsSubmitting] = useState(false); // Estado de envío
   const [loading, setLoading] = useState(false); // Estado de "loading" mientras se envía el formulario
+  const { theme } = useTheme();
+  const backgroundColor = theme === "dark" ? "#034aa6" : "#0f6ca7";
 
   const sanitizeInput = (input) => {
     return DOMPurify.sanitize(input); 
@@ -96,7 +99,12 @@ export const ContactSection = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-[#034aa6] to-[#0f6ca7] text-white py-2">
+    <footer className=" text-white py-2  relative overflow-hidden" style={{
+      
+      backgroundColor: backgroundColor, // Cambiar el color de fondo según el tema
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}>
       <div className="mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Información de contacto */}
@@ -186,7 +194,7 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.name ? "error" : "default"}
                     errorMessage={errors.name}
-                    className="bg-white/10 backdrop-blur-sm text-white"
+                    className="bg-white/10 backdrop-blur-sm text-white !bg-white/10 !text-white"
                     required
                   />
                 </div>
@@ -203,7 +211,7 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.phone ? "error" : "default"}
                     errorMessage={errors.phone}
-                    className="bg-white/10 backdrop-blur-sm text-white"
+                    className="bg-white/10 backdrop-blur-sm text-white !bg-white/10 !text-white"
                     required
                   />
                 </div>
@@ -219,7 +227,7 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.email ? "error" : "default"}
                     errorMessage={errors.email}
-                    className="bg-white/10 backdrop-blur-sm text-white"
+                    className="bg-white/10 backdrop-blur-sm text-white !bg-white/10 !text-white"
                     required
                   />
                 </div>
@@ -237,7 +245,7 @@ export const ContactSection = () => {
                   color={errors.message ? "error" : "default"}
                   errorMessage={errors.message}
                   rows={4}
-                  className="bg-white/10 backdrop-blur-sm text-white"
+                  className="bg-white/10 backdrop-blur-sm text-white !bg-white/10 !text-white"
                   required
                 />
               </div>
