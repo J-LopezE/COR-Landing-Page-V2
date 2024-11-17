@@ -2,10 +2,19 @@ import React from "react";
 import { Button, Image } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import ImgServer from "../img/server.webp";
+import { useTheme } from "next-themes";
 
 export const HeroSection = () => {
+  const { theme } = useTheme();
+  const backgroundColor = theme === "dark" ? "#034aa6" : "#0f6ca7";
   return (
-    <section className="bg-gradient-to-r from-[#0048aa] to-[#006cac] text-white py-20 md:py-32 relative overflow-hidden">
+    <section className=" text-white py-20 md:py-32 relative overflow-hidden" style={{
+      
+      backgroundColor: backgroundColor, // Cambiar el color de fondo según el tema
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}>
+      {" "}
       <div className=" mx-auto px-4 flex flex-col md:flex-row items-center relative z-10 ">
         <div className="md:w-1/2 mb-10 md:mb-0">
           <motion.h1
@@ -30,7 +39,7 @@ export const HeroSection = () => {
             transition={{ delay: 0.6 }}
           >
             <Button
-              color="warning"
+              color="secondary"
               type="submit"
               onClick={() => (window.location.href = "#servicios")}
             >

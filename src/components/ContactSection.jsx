@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Input, Textarea } from "@nextui-org/react";
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import DOMPurify from 'dompurify'; 
 import { Alert, AlertTitle, CircularProgress } from '@mui/material'; 
@@ -41,6 +41,7 @@ export const ContactSection = () => {
   const validateForm = () => {
     let newErrors = {};
     if (!formState.name.trim()) newErrors.name = "El nombre es requerido";
+    if (!formState.phone.trim()) newErrors.phone = "El telefono es requerido";
     if (!formState.email.trim()) {
       newErrors.email = "El email es requerido";
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
@@ -70,9 +71,9 @@ export const ContactSection = () => {
         });
 
         if (response.ok) {
-          setAlertMessage("¡Mensaje Enviado!"); // Mensaje de éxito
+          setAlertMessage("¡Mensaje Enviado!"); 
           setShowAlert(true);
-          setFormState({ name: "", email: "", message: "" }); // Limpiar el formulario
+          setFormState({ name: "",phone: "", email: "", message: "" }); // Limpiar el formulario
 
           // Ocultar la alerta después de 5 segundos
           setTimeout(() => {
@@ -95,7 +96,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-[#0048aa] to-[#006cac] text-white py-2">
+    <footer className="bg-gradient-to-r from-[#034aa6] to-[#0f6ca7] text-white py-2">
       <div className="mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Información de contacto */}
@@ -148,7 +149,7 @@ export const ContactSection = () => {
             <h4 className="font-semibold mb-3">Síguenos</h4>
             <hr className="border-white mb-5 mx-auto w-1/2" />
             <div className="flex space-x-3">
-              {[{ icon: Facebook, label: "Facebook" }, { icon: Twitter, label: "Twitter" }, { icon: Linkedin, label: "LinkedIn" }].map(
+              {[{ icon: Facebook, label: "Facebook" }, { icon: Twitter, label: "Twitter" }, { icon: Instagram, label: "Instagram" }].map(
                 (social) => (
                   <a
                     key={social.label}
@@ -173,8 +174,7 @@ export const ContactSection = () => {
             <h3 className="text-lg font-semibold mb-2 text-center">Contáctanos</h3>
             <hr className="border-white mb-4" />
             <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col">
+            <div className="flex flex-col">
                   <label className="text-white" htmlFor="name">
                     Nombre
                   </label>
@@ -186,6 +186,23 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.name ? "error" : "default"}
                     errorMessage={errors.name}
+                    className="bg-white/10 backdrop-blur-sm text-white"
+                    required
+                  />
+                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col">
+                  <label className="text-white" htmlFor="name">
+                   Telefono
+                  </label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={formState.phone}
+                    onChange={handleChange}
+                    variant="bordered"
+                    color={errors.phone ? "error" : "default"}
+                    errorMessage={errors.phone}
                     className="bg-white/10 backdrop-blur-sm text-white"
                     required
                   />
@@ -249,7 +266,7 @@ export const ContactSection = () => {
             ) : (
               <Alert severity="success" className="text-center bg-green-600 w-1/2">
                 <AlertTitle>{alertMessage}</AlertTitle>
-                Tu mensaje se ha enviado correctamente. Nos pondremos en contacto pronto.
+                Mensaje enviado. Un agente se pondrá en contacto con usted en breve. Agradecemos su interés.
               </Alert>
             )}
           </div>
@@ -261,7 +278,7 @@ export const ContactSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p>&copy; 2024 COR COMPUTADORAS - Todos los derechos reservados.</p>
+          <p>&copy; 2024 COR-Computadoras - Todos los derechos reservados.</p>
         </motion.div>
       </div>
     </footer>

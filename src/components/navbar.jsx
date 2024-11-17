@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
+  Switch,
   Navbar as NextUINavbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
   NavbarMenu,
-} from "@nextui-org/react";
-import Logo from "../../src/img/logocoruru.webp";
+} from "@nextui-org/react"; // Importamos Switch de NextUI
+import { Moon, Sun } from "lucide-react";
+import Logo from "../../src/img/logocor.svg";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +20,11 @@ export function Navbar() {
   const { setTheme, theme } = useTheme();
   const [isDark, setIsDark] = useState(theme === "dark");
 
-  const toggleTheme = () => {
-    const newTheme = isDark ? "light" : "dark";
+  // Función para alternar el tema cuando el Switch cambie
+  const toggleTheme = (checked) => {
+    const newTheme = checked ? "dark" : "light";
     setTheme(newTheme);
-    setIsDark(!isDark);
+    setIsDark(checked); // Actualizamos el estado local para reflejar el cambio
   };
 
   const handleSmoothScroll = (event, target) => {
@@ -37,6 +39,11 @@ export function Navbar() {
     }
   };
 
+  // Sincronizamos el estado isDark con el tema cada vez que se actualiza el theme
+  useEffect(() => {
+    setIsDark(theme === "dark");
+  }, [theme]);
+
   return (
     <NextUINavbar
       isBordered
@@ -44,25 +51,24 @@ export function Navbar() {
       className="bg-white/80 backdrop-blur-md dark:bg-gray-950/80"
     >
       <NavbarBrand>
-        <a
-          href="/"
-          className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2"
-        >
-          <div className="p-2">
-            <img
-              src={Logo}
-              alt="Logo"
-              style={{ height: "4rem", width: "auto" }}
-            />
-          </div>
-        </a>
+        <NavbarItem>
+          <a href="/">
+            <div className="p-2">
+              <img
+                src={Logo} // Logo SVG
+                alt="Logo"
+                style={{ height: "10rem", width: "auto" }}
+                className="h-40 w-auto text-[#034aa6] dark:text-white fill-current"
+              />
+            </div>
+          </a>
+        </NavbarItem>
       </NavbarBrand>
+
       <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle
-          className="sm:hidden"
-          size="xl"
-        />
+        <NavbarMenuToggle className="sm:hidden" size="xl" />
       </NavbarContent>
+
       <NavbarContent>
         <div
           className={`flex items-baseline space-x-4 ${
@@ -192,25 +198,61 @@ export function Navbar() {
       </NavbarContent>
 
       <NavbarItem className="flex items-center">
-        <button onClick={toggleTheme} aria-label="Toggle theme">
-          {isDark ? (
-            <Sun className="h-6 w-6" variant="shadow" />
-          ) : (
-            <Moon className="h-6 w-6" variant="light" />
-          )}
-        </button>
+        {/* Switch para alternar entre el modo claro y oscuro */}
+        <Switch
+          defaultSelected={isDark}
+          size="sm"
+          color="primary"
+          startContent={<Sun className="h-5 w-5 text-yellow-500" />}
+          endContent={<Moon className="h-5 w-5 text-gray-500" />}
+          onChange={(e) => toggleTheme(e.target.checked)} // Cambio de tema al alternar el switch
+        >
+        </Switch>
       </NavbarItem>
-<NavbarMenu>
-      <NavbarItem className="sm:hidden">
-        <div className={`absolute left-0 right-0 bg-white dark:bg-gray-950 p-5 flex flex-col items-start`}>
-          <a href="#inicio"  className="text-gray-700 dark:text-white mb-2 text-lg">Inicio</a>
-          <a href="#sobre-nosotros"  className="text-gray-700 dark:text-white mb-2 text-lg">Acerca de Nosotros</a>
-          <a href="#clientes"  className="text-gray-700 dark:text-white mb-2 text-lg">Nuestros Clientes</a>
-          <a href="#servicios" className="text-gray-700 dark:text-white mb-2 text-lg">Servicios</a>
-          <a href="#socios"  className="text-gray-700 dark:text-white mb-2 text-lg">Socios</a>
-          <a href="#contacto"  className="text-gray-700 dark:text-white mb-2 text-lg">Contacto</a>
-        </div>
-      </NavbarItem>
+
+      <NavbarMenu>
+        <NavbarItem className="sm:hidden">
+          <div
+            className={`absolute left-0 right-0 bg-white dark:bg-gray-950 p-5 flex flex-col items-start`}
+          >
+            <a
+              href="#inicio"
+              className="text-gray-700 dark:text-white mb-2 text-lg"
+            >
+              Inicio
+            </a>
+            <a
+              href="#sobre-nosotros"
+              className="text-gray-700 dark:text-white mb-2 text-lg"
+            >
+              Acerca de Nosotros
+            </a>
+            <a
+              href="#clientes"
+              className="text-gray-700 dark:text-white mb-2 text-lg"
+            >
+              Nuestros Clientes
+            </a>
+            <a
+              href="#servicios"
+              className="text-gray-700 dark:text-white mb-2 text-lg"
+            >
+              Servicios
+            </a>
+            <a
+              href="#socios"
+              className="text-gray-700 dark:text-white mb-2 text-lg"
+            >
+              Socios
+            </a>
+            <a
+              href="#contacto"
+              className="text-gray-700 dark:text-white mb-2 text-lg"
+            >
+              Contacto
+            </a>
+          </div>
+        </NavbarItem>
       </NavbarMenu>
     </NextUINavbar>
   );
