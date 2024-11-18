@@ -230,23 +230,6 @@ export const ContactSection = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col">
-                  <label className="text-text" htmlFor="phone">
-                    Teléfono
-                  </label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    value={formState.phone}
-                    onChange={handleChange}
-                    variant="bordered"
-                    color={errors.phone ? "error" : "default"}
-                    errorMessage={errors.phone}
-                    className="bg-transparent border-2 border-blue-500 rounded-lg p-1 mt-1 focus:ring-4 focus:ring-blue-300 w-2/3"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col">
                   <label className="text-text" htmlFor="email">
                     Correo electrónico
                   </label>
@@ -258,7 +241,23 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.email ? "error" : "default"}
                     errorMessage={errors.email}
-                    className="bg-transparent border-2 border-blue-500 rounded-lg p-1 mt-1 focus:ring-4 focus:ring-blue-300 w-2/2  -ml-4" // Ajuste con margen negativo
+                    className="bg-transparent border-2 border-blue-500 rounded-lg p-1 mt-1 focus:ring-4 focus:ring-blue-300 w-2/2" // Ajuste con margen negativo
+                    required
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-text" htmlFor="phone">
+                    Teléfono
+                  </label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={formState.phone}
+                    onChange={handleChange}
+                    variant="bordered"
+                    color={errors.phone ? "error" : "default"}
+                    errorMessage={errors.phone}
+                    className="bg-transparent border-2 border-blue-500 rounded-lg p-1 mt-1 focus:ring-4 focus:ring-blue-300 w-3/3"
                     required
                   />
                 </div>
