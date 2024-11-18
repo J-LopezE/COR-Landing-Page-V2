@@ -33,59 +33,58 @@ export const AboutSection = () => {
 
   return (
     <section
-      id="sobre-nosotros"
-      className="py-20 overflow-hidden"
-    >
-      <div className="container mx-auto px-4  flex flex-col justify-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-text">
-          Nuestra Esencia
-        </h2>
-        <div className="flex flex-col lg:flex-row gap-12 items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ rotateY: -90 }}  
-              animate={{ rotateY: 0 }}    
-              exit={{ rotateY: 90 }}      
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="w-full lg:w-2/3"
+    id="sobre-nosotros"
+    className="py-20 overflow-hidden"
+  >
+    <div className="container mx-auto px-4 flex flex-col justify-center">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-text">
+        Nuestra Esencia
+      </h2>
+      <div className="flex flex-col lg:flex-row gap-12 items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ rotateY: -90 }}  
+            animate={{ rotateY: 0 }}    
+            exit={{ rotateY: 90 }}      
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full lg:w-2/3"
+          >
+            <div
+              className="bg-dark-glass backdrop-blur-lg dark:bg-light-glass dark:backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden"
+              style={{ minHeight: "400px" }}  
             >
-              <div
-                className="bg-dark-glass backdrop-blur-lg dark:bg-light-glass dark:backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden transform preserve-3d hover:scale-105 hover:rotate-3 transition-all duration-500"
-                style={{ minHeight: "400px" }}  
-              >
-                <div className="p-6">
-                  <motion.div
-                    className="flex items-center justify-center mb-6"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1, rotateY: 360 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                  >
-                    {content[activeTab]?.icon &&
-                      React.createElement(content[activeTab].icon, {
-                        size: 64,
-                        className: "text-blue-900",
-                      })}
-                  </motion.div>
-                  <h3 className="text-3xl font-bold mb-4 text-center text-blue-900">
-                    {content[activeTab]?.title}
-                  </h3>
-                  <p className="leading-relaxed text-blue-900">
-                    {content[activeTab]?.content}
-                  </p>
-                </div>
+              <div className="p-6">
+                <motion.div
+                  className="flex items-center justify-center mb-6"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1, rotateY: 360 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  {content[activeTab]?.icon &&
+                    React.createElement(content[activeTab].icon, {
+                      size: 64,
+                      className: "text-blue-900",
+                    })}
+                </motion.div>
+                <h3 className="text-3xl font-bold mb-4 text-center text-blue-900">
+                  {content[activeTab]?.title}
+                </h3>
+                <p className="leading-relaxed text-blue-900">
+                  {content[activeTab]?.content}
+                </p>
               </div>
-            </motion.div>
-          </AnimatePresence>
-          <div className="w-full lg:w-1/3">
-            <TabSelector
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              setIsHovering={setIsHovering}
-            />
-          </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        <div className="w-full lg:w-1/3 ">
+          <TabSelector
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            setIsHovering={setIsHovering}
+          />
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>  );
 };
