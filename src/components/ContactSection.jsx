@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { Button, Input, Textarea } from "@nextui-org/react";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Send } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Send,
+} from "lucide-react";
 import { motion } from "framer-motion";
-import DOMPurify from 'dompurify'; 
-import { Alert, AlertTitle, CircularProgress } from '@mui/material'; 
+import DOMPurify from "dompurify";
+import { Alert, AlertTitle, CircularProgress } from "@mui/material";
+import { useTheme } from "next-themes";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -19,20 +28,21 @@ export const ContactSection = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [showAlert, setShowAlert] = useState(false); // Para manejar las alertas
-  const [alertMessage, setAlertMessage] = useState(""); // Mensaje de la alerta
-  const [isSubmitting, setIsSubmitting] = useState(false); // Estado de envío
-  const [loading, setLoading] = useState(false); // Estado de "loading" mientras se envía el formulario
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
+  const backgroundColor = theme === "dark" ? "#034aa6" : "#0f6ca7";
 
   const sanitizeInput = (input) => {
-    return DOMPurify.sanitize(input); 
+    return DOMPurify.sanitize(input);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: sanitizeInput(value) }));
 
-    // Limpiar error si el campo cambia
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -47,48 +57,50 @@ export const ContactSection = () => {
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
       newErrors.email = "Email inválido";
     }
-    if (!formState.message.trim()) newErrors.message = "El mensaje es requerido";
+    if (!formState.message.trim())
+      newErrors.message = "El mensaje es requerido";
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    e.preventDefault();
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
-      setLoading(true); // Iniciamos el estado de loading
-      setIsSubmitting(true); // Marcamos que el formulario está siendo enviado
-      setAlertMessage("Enviando..."); // Mostramos alerta de "Enviando"
+      setLoading(true);
+      setIsSubmitting(true);
+      setAlertMessage("Enviando...");
 
       try {
-        // Enviar el formulario a FormSubmit
-        const response = await fetch("https://formsubmit.co/ajax/jorgeisrael.lopez@gmail.com", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formState),
-        });
+        const response = await fetch(
+          "https://formsubmit.co/ajax/jorgeisrael.lopez@gmail.com",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formState),
+          }
+        );
 
         if (response.ok) {
-          setAlertMessage("¡Mensaje Enviado!"); 
+          setAlertMessage("¡Mensaje Enviado!");
           setShowAlert(true);
-          setFormState({ name: "",phone: "", email: "", message: "" }); // Limpiar el formulario
+          setFormState({ name: "", phone: "", email: "", message: "" });
 
-          // Ocultar la alerta después de 5 segundos
           setTimeout(() => {
             setShowAlert(false);
-          }, 5000); // La alerta desaparecerá después de 5 segundos
+          }, 5000);
         } else {
           setAlertMessage("Hubo un error al enviar el mensaje.");
-          setShowAlert(true); // Mostrar alerta de error
+          setShowAlert(true);
         }
       } catch (error) {
         setAlertMessage("Hubo un error al enviar el mensaje.");
-        setShowAlert(true); // Mostrar alerta de error
+        setShowAlert(true);
       } finally {
-        setLoading(false); // Regresar al estado original de "loading"
-        setIsSubmitting(false); // Regresar al estado de formulario normal
+        setLoading(false);
+        setIsSubmitting(false);
       }
     } else {
       setErrors(newErrors);
@@ -96,50 +108,47 @@ export const ContactSection = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-[#034aa6] to-[#0f6ca7] text-white py-2">
+    <footer className="text-text py-2 relative overflow-hidden">
       <div className="mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Información de contacto */}
-          <motion.div
+            <motion.div
             variants={fadeIn}
             initial="initial"
             animate="animate"
             className="flex flex-col"
           >
-            <h3 className="text-lg font-semibold mb-2">Información de Contacto</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              Información de Contacto
+            </h3>
             <hr className="border-white mb-5 mx-auto w-full" />
             <ul>
               <li className="flex items-center mb-3">
-                <Mail className="mr-2 h-5 w-5 text-blue-300" />
+                <Mail className="mr-2 h-5 w-5 text-text" />
                 <span>Email:</span>
                 <a
                   href="mailto:info@techsupport.com"
-                  className="ml-2 text-blue-200 hover:text-white transition-colors"
+                  className="ml-2 text-text "
                 >
                   info@techsupport.com
                 </a>
               </li>
               <li className="flex items-center mb-3">
-                <Phone className="mr-2 h-5 w-5 text-blue-300" />
+                <Phone className="mr-2 h-5 w-5 text-text" />
                 <span>Teléfono:</span>
-                <a
-                  href="tel:+525592964653"
-                  className="ml-2 text-blue-200 hover:text-white transition-colors"
-                >
+                <a href="tel:+525592964653" className="ml-2 text-text ">
                   +52(559) 296-4653
                 </a>
               </li>
               <li className="flex items-start">
-                <MapPin className="mr-2 h-5 w-5 text-blue-300 mt-1" />
+                <MapPin className="mr-2 h-5 w-5 text-text mt-1" />
                 <span>Dirección:</span>
-                <p className="ml-2 text-blue-200">
+                <p className="ml-2 text-text">
                   Tepeyollotl mz 1 lt 3 CD Ecatepec CP 55067
                 </p>
               </li>
             </ul>
           </motion.div>
 
-          {/* Redes Sociales */}
           <motion.div
             variants={fadeIn}
             initial="initial"
@@ -149,51 +158,56 @@ export const ContactSection = () => {
             <h4 className="font-semibold mb-3">Síguenos</h4>
             <hr className="border-white mb-5 mx-auto w-1/2" />
             <div className="flex space-x-3">
-              {[{ icon: Facebook, label: "Facebook" }, { icon: Twitter, label: "Twitter" }, { icon: Instagram, label: "Instagram" }].map(
-                (social) => (
-                  <a
-                    key={social.label}
-                    href="#"
-                    className="bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-full"
-                    aria-label={`Síguenos en ${social.label}`}
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </a>
-                )
-              )}
+              {[
+                { icon: Facebook, label: "Facebook" },
+                { icon: Twitter, label: "Twitter" },
+                { icon: Instagram, label: "Instagram" },
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href="#"
+                  className="bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-full"
+                  aria-label={`Síguenos en ${social.label}`}
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
             </div>
           </motion.div>
 
-          {/* Formulario de contacto */}
           <motion.div
             variants={fadeIn}
             initial="initial"
             animate="animate"
             className="flex flex-col"
           >
-            <h3 className="text-lg font-semibold mb-2 text-center">Contáctanos</h3>
+            <h3 className="text-lg font-semibold mb-2 text-center">
+              Contáctanos
+            </h3>
             <hr className="border-white mb-4" />
             <form onSubmit={handleSubmit}>
-            <div className="flex flex-col">
-                  <label className="text-white" htmlFor="name">
-                    Nombre
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    variant="bordered"
-                    color={errors.name ? "error" : "default"}
-                    errorMessage={errors.name}
-                    className="bg-white/10 backdrop-blur-sm text-white"
-                    required
-                  />
-                </div>
+              <div className="flex flex-col">
+                <label className="text-text" htmlFor="name">
+                  Nombre Completo
+                </label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={formState.name}
+                  onChange={handleChange}
+                  variant="bordered"
+                  color={errors.name ? "error" : "default"}
+                  errorMessage={errors.name}
+                  className=" bg-dark-glass bg-opacity-60 backdrop-blur-lg 
+        dark:bg-light-glass dark:bg-opacity-50 dark:backdrop-blur-lg dark:text-white 
+        light:bg-light-glass light:bg-opacity-80 light:backdrop-blur-lg light:text-black"
+                  required
+                />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col">
-                  <label className="text-white" htmlFor="name">
-                   Telefono
+                  <label className="text-text" htmlFor="phone">
+                    Teléfono
                   </label>
                   <Input
                     id="phone"
@@ -203,12 +217,14 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.phone ? "error" : "default"}
                     errorMessage={errors.phone}
-                    className="bg-white/10 backdrop-blur-sm text-white"
+                    className=" bg-dark-glass bg-opacity-60 backdrop-blur-lg 
+        dark:bg-light-glass dark:bg-opacity-50 dark:backdrop-blur-lg dark:text-white 
+        light:bg-light-glass light:bg-opacity-80 light:backdrop-blur-lg light:text-black"
                     required
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-white" htmlFor="email">
+                  <label className="text-text" htmlFor="email">
                     Correo electrónico
                   </label>
                   <Input
@@ -219,14 +235,16 @@ export const ContactSection = () => {
                     variant="bordered"
                     color={errors.email ? "error" : "default"}
                     errorMessage={errors.email}
-                    className="bg-white/10 backdrop-blur-sm text-white"
+                    className=" bg-dark-glass bg-opacity-60 backdrop-blur-lg 
+        dark:bg-light-glass dark:bg-opacity-50 dark:backdrop-blur-lg dark:text-white 
+        light:bg-light-glass light:bg-opacity-80 light:backdrop-blur-lg light:text-black"
                     required
                   />
                 </div>
               </div>
               <div className="mt-4">
-                <label className="text-white" htmlFor="message">
-                  Mensaje
+                <label className="text-text" htmlFor="message">
+                  Comentarios
                 </label>
                 <Textarea
                   id="message"
@@ -237,7 +255,9 @@ export const ContactSection = () => {
                   color={errors.message ? "error" : "default"}
                   errorMessage={errors.message}
                   rows={4}
-                  className="bg-white/10 backdrop-blur-sm text-white"
+                  className=" bg-dark-glass bg-opacity-60 backdrop-blur-lg 
+        dark:bg-light-glass dark:bg-opacity-50 dark:backdrop-blur-lg dark:text-white 
+        light:bg-light-glass light:bg-opacity-80 light:backdrop-blur-lg light:text-black"
                   required
                 />
               </div>
@@ -245,9 +265,9 @@ export const ContactSection = () => {
                 type="submit"
                 color="primary"
                 size="lg"
-                className="w-full mt-4"
+                className="w-full mt-4 text-white"
                 endContent={<Send className="ml-2" size={17} />}
-                disabled={loading} // Deshabilitar el botón si se está enviando el mensaje
+                disabled={loading}
               >
                 {loading ? "Enviando..." : "Enviar mensaje"}
               </Button>
@@ -255,7 +275,6 @@ export const ContactSection = () => {
           </motion.div>
         </div>
 
-        {/* Alerta de carga o éxito */}
         {showAlert && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             {loading ? (
@@ -264,16 +283,20 @@ export const ContactSection = () => {
                 <CircularProgress color="inherit" />
               </Alert>
             ) : (
-              <Alert severity="success" className="text-center bg-green-600 w-1/2">
+              <Alert
+                severity="success"
+                className="text-center bg-green-600 w-1/2"
+              >
                 <AlertTitle>{alertMessage}</AlertTitle>
-                Mensaje enviado. Un agente se pondrá en contacto con usted en breve. Agradecemos su interés.
+                Mensaje enviado. Un agente se pondrá en contacto con usted en
+                breve. Agradecemos su interés.
               </Alert>
             )}
           </div>
         )}
 
         <motion.div
-          className="mt-6 text-center text-sm mr-5"
+          className="mt-6 text-center text-sm mr-5 text-text"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}

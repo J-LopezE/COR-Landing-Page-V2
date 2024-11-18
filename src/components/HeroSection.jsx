@@ -8,12 +8,7 @@ export const HeroSection = () => {
   const { theme } = useTheme();
   const backgroundColor = theme === "dark" ? "#034aa6" : "#0f6ca7";
   return (
-    <section className=" text-white py-20 md:py-32 relative overflow-hidden" style={{
-      
-      backgroundColor: backgroundColor, // Cambiar el color de fondo según el tema
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}>
+    <section className=" text-text py-20 md:py-32 relative overflow-hidden" >
       {" "}
       <div className=" mx-auto px-4 flex flex-col md:flex-row items-center relative z-10 ">
         <div className="md:w-1/2 mb-10 md:mb-0">
@@ -39,9 +34,10 @@ export const HeroSection = () => {
             transition={{ delay: 0.6 }}
           >
             <Button
-              color="secondary"
+              color="primary"
               type="submit"
               onClick={() => (window.location.href = "#servicios")}
+              className="text-light"
             >
               Descubre Más
             </Button>
