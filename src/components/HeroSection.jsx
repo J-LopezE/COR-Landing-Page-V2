@@ -7,10 +7,11 @@ import { useTheme } from "next-themes";
 export const HeroSection = () => {
   const { theme } = useTheme();
   const backgroundColor = theme === "dark" ? "#034aa6" : "#0f6ca7";
+
   return (
-    <section className=" text-text py-20 md:py-32 relative overflow-hidden" >
-      {" "}
-      <div className=" mx-auto px-4 flex flex-col md:flex-row items-center relative z-10 ">
+    <section className="text-text py-20 md:py-32 relative overflow-hidden">
+      <div className="mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
+        
         <div className="md:w-1/2 mb-10 md:mb-0">
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 font-montserrat"
@@ -20,6 +21,7 @@ export const HeroSection = () => {
           >
             Soluciones que impulsan el corazón de tu empresa.
           </motion.h1>
+          
           <motion.p
             className="text-xl mb-10 font-open-sans"
             initial={{ opacity: 0, y: 20 }}
@@ -28,6 +30,7 @@ export const HeroSection = () => {
           >
             Innovación tecnológica a tu alcance
           </motion.p>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -37,12 +40,14 @@ export const HeroSection = () => {
               color="primary"
               type="submit"
               onClick={() => (window.location.href = "#servicios")}
-              className="text-light"
+              className="text-light bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
+              aria-label="Descubre más sobre nuestros servicios"
             >
               Descubre Más
             </Button>
           </motion.div>
         </div>
+
         <motion.div
           className="md:w-1/2"
           initial={{ scale: 0.8 }}
@@ -50,13 +55,16 @@ export const HeroSection = () => {
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <div className="relative">
-            <div className="absolute inset-0  rounded-lg filter blur-2xl  transform rotate-6"></div>
+            <div className="absolute inset-0 rounded-lg filter blur-2xl transform rotate-6"></div>
             <Image
               isBlurred
               isZoomed
               src={ImgServer}
-              alt="Innovación Tecnológica"
-              className="m-5"
+              alt="Innovación Tecnológica - Soporte Técnico y Desarrollo de Software"
+              className="m-5 rounded-lg shadow-lg"
+              width={700} 
+              height={400} 
+              objectFit="cover"
             />
           </div>
         </motion.div>

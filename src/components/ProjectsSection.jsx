@@ -22,7 +22,7 @@ export const ProjectsSection = () => {
       if (!isHovering) {
         setActiveIndex((prevIndex) => (prevIndex + 1) % clients.length);
       }
-    }, 3000);
+    }, 3000); 
     return () => clearInterval(interval);
   }, [isHovering]);
 
@@ -75,6 +75,7 @@ export const ProjectsSection = () => {
                 onClick={() => setActiveIndex(index)}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
+                aria-live="polite" 
               />
             ))}
           </div>
