@@ -27,6 +27,9 @@ export const PartnersSection = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-5 text-text">
           Nuestros Socios Estratégicos
         </h2>
+        <p className="text-center mb-10 text-text">
+          Trabajamos con los mejores para ofrecerte soluciones tecnológicas de vanguardia.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 justify-center items-center">
           {partners.map((partner, index) => (
             <PartnerCard key={index} partner={partner} />
@@ -39,14 +42,12 @@ export const PartnersSection = () => {
 
 function PartnerCard({ partner }) {
   return (
-    <Card 
-      className="overflow-hidden group p-6 rounded-lg
-        bg-dark-glass bg-opacity-60 backdrop-blur-lg 
-        dark:bg-light-glass dark:bg-opacity-50 dark:backdrop-blur-lg dark:text-white 
-        light:bg-light-glass light:bg-opacity-80 light:backdrop-blur-lg light:text-black 
-      "
-    >
-      <CardBody className="p-6 h-full flex flex-col justify-between">
+<Card 
+  className="overflow-hidden group p-6 rounded-lg 
+    bg-white dark:bg-gray-800 
+    shadow-lg hover:shadow-2xl transition-shadow duration-300"
+>
+      <CardBody className="p-4 h-full flex flex-col justify-between">
         <motion.div
           className="transition-all duration-300 filter grayscale group-hover:grayscale-0"
           initial={{ scale: 0.95 }}
@@ -59,8 +60,8 @@ function PartnerCard({ partner }) {
             className="w-full h-40 object-contain mb-4"
           />
         </motion.div>
-        <h3 className="text-xl font-semibold text-center text-blue-900 mb-2">{partner.name}</h3>
-        <p className="text-sm text-center text-blue-900">
+        <h3 className="text-xl font-semibold text-center text-text mb-2">{partner.name}</h3>
+        <p className="text-sm text-center text-text">
           {partner.specialties.join(' • ')}
         </p>
       </CardBody>
