@@ -10,7 +10,7 @@ import {
   NavbarItem,
   NavbarMenuToggle,
   NavbarMenu,
-} from "@nextui-org/react"; // Importamos Switch de NextUI
+} from "@nextui-org/react"; 
 import { Moon, Sun } from "lucide-react";
 import Logo from "../../src/img/logocor.svg";
 
@@ -20,11 +20,10 @@ export function Navbar() {
   const { setTheme, theme } = useTheme();
   const [isDark, setIsDark] = useState(theme === "dark");
 
-  // Función para alternar el tema cuando el Switch cambie
   const toggleTheme = (checked) => {
     const newTheme = checked ? "dark" : "light";
     setTheme(newTheme);
-    setIsDark(checked); // Actualizamos el estado local para reflejar el cambio
+    setIsDark(checked); 
   };
 
   const handleSmoothScroll = (event, target) => {
@@ -39,7 +38,6 @@ export function Navbar() {
     }
   };
 
-  // Sincronizamos el estado isDark con el tema cada vez que se actualiza el theme
   useEffect(() => {
     setIsDark(theme === "dark");
   }, [theme]);
@@ -198,14 +196,13 @@ export function Navbar() {
       </NavbarContent>
 
       <NavbarItem className="flex items-center">
-        {/* Switch para alternar entre el modo claro y oscuro */}
         <Switch
           defaultSelected={isDark}
           size="sm"
           color="primary"
           startContent={<Sun className="h-5 w-5 text-yellow-500" />}
           endContent={<Moon className="h-5 w-5 text-gray-500" />}
-          onChange={(e) => toggleTheme(e.target.checked)} // Cambio de tema al alternar el switch
+          onChange={(e) => toggleTheme(e.target.checked)} 
         >
         </Switch>
       </NavbarItem>

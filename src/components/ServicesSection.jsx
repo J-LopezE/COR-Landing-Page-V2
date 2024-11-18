@@ -60,9 +60,9 @@ export const ServicesSection = () => {
         <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-75 group-hover:opacity-90 transition-opacity duration-300`} />
         <div className="relative p-8 h-full flex flex-col justify-between z-10">
           <div>
-            <Icon className="w-16 h-16 text-white mb-6" />
+            <Icon className="w-16 h-16  mb-6" />
             <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-            <p className="text-gray-200">{service.description}</p>
+            <p className="">{service.description}</p>
           </div>
           <motion.div 
             className="mt-6"
@@ -134,9 +134,9 @@ export const ServicesSection = () => {
   }
 
   return (
-    <section className="py-24  text-white overflow-hidden">
+    <section className="py-20  text-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <h2 className="text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-teal-400">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10  text-text">
           Servicios que Transforman
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
