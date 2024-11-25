@@ -44,10 +44,9 @@ function PartnerCard({ partner }) {
   return (
 <Card 
   className="overflow-hidden group p-6 rounded-lg 
-    bg-white dark:bg-gray-800 
-    shadow-lg hover:shadow-2xl transition-shadow duration-300"
+    bg-cardBackground text-text shadow-card dark:bg-cardBackground dark:text-cardText transition-shadow duration-300"
 >
-      <CardBody className="p-4 h-full flex flex-col justify-between">
+      <CardBody className="p-4 h-full flex flex-col justify-between ">
         <motion.div
           className="transition-all duration-300 filter grayscale group-hover:grayscale-0"
           initial={{ scale: 0.95 }}
