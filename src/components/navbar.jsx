@@ -16,25 +16,18 @@ import Logo from "../../src/img/logocor.svg";
 import classNames from "classnames";
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme(); 
   const location = useLocation();
-  const { setTheme, theme } = useTheme();
-  const [isDark, setIsDark] = useState(theme === "dark");
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
-      setIsDark(storedTheme === "dark");
-    }
-  }, [setTheme]);
+
+  const isDark = resolvedTheme === "dark"; 
 
   const toggleTheme = useCallback(
     (checked) => {
       const newTheme = checked ? "dark" : "light";
       setTheme(newTheme);
-      setIsDark(checked);
-      localStorage.setItem("theme", newTheme); // Guardar tema en localStorage
+      localStorage.setItem("theme", newTheme); 
     },
     [setTheme]
   );
@@ -50,10 +43,6 @@ export const Navbar = () => {
       window.location.hash = target;
     }
   }, []);
-
-  useEffect(() => {
-    setIsDark(theme === "dark");
-  }, [theme]);
 
   const menuClasses = classNames("flex items-baseline space-x-4", {
     block: isOpen,
@@ -73,8 +62,7 @@ export const Navbar = () => {
               <img
                 src={Logo}
                 alt="Logo"
-                style={{ height: "10rem", width: "auto" }}
-                className="h-40 w-auto text-[#034aa6] dark:text-white fill-current sm:h-52 md:h-40 lg:h-40"
+                className="sm:h-40 lg:h-40"
               />
             </div>
           </a>
@@ -93,7 +81,7 @@ export const Navbar = () => {
         <div className={menuClasses}>
           {[
             "inicio",
-            "sobre-nosotros",
+            "quiénes somos",
             "clientes",
             "servicios",
             "socios",
@@ -127,14 +115,19 @@ export const Navbar = () => {
 
       <NavbarItem className="flex items-center">
         <Switch
-          selected={isDark}
-          size="sm"
+          selected={isDark} 
+          size="md"
           color="primary"
-          startContent={<Sun className="h-5 w-5 text-yellow-500" />}
-          endContent={<Moon className="h-5 w-5 text-gray-500" />}
           onChange={(e) => toggleTheme(e.target.checked)}
           aria-checked={isDark ? "true" : "false"}
           aria-label="Switch between light and dark mode"
+          thumbIcon={({ isSelected }) =>
+            isSelected ? (
+              <Moon className="h-5 w-5 bg-none text-blue-900" />
+            ) : (
+              <Sun className="h-5 w-5 bg-none text-blue-900" />
+            )
+          }
         />
       </NavbarItem>
 
@@ -146,7 +139,7 @@ export const Navbar = () => {
           <div className="absolute left-0 right-0 p-5 flex flex-col items-start">
             {[
               "inicio",
-              "sobre-nosotros",
+              "quiénes somos",
               "clientes",
               "servicios",
               "socios",

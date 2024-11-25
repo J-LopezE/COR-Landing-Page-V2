@@ -5,6 +5,7 @@ import { ServicesSection } from "../components/ServicesSection.jsx";
 import { ProjectsSection } from "../components/ProjectsSection.jsx";
 import { PartnersSection } from "../components/PartnersSection.jsx";
 import { ContactSection } from "../components/ContactSection.jsx";
+import { Spacer } from "@nextui-org/react";
 
 function Home() {
   const [activeSection, setActiveSection] = useState("inicio");
@@ -36,7 +37,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="relative bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 min-h-screen">
+    <div className="relative  min-h-screen">
     
       <nav className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40">
         <ul className="space-y-2">
@@ -109,6 +110,7 @@ function Home() {
           <HeroSection />
         </div>
       </section>
+      <Spacer y={1} />
 
       <section
         id="sobre-nosotros"

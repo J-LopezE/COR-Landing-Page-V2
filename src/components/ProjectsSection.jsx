@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 import { AnimatedSection } from "./AnimatedSection.jsx";
 import LogoCapama from "../img/capama_r.webp";
 import LogoCe from "../img/ceenergy.webp";
 import LogoAyuntamiento from "../img/LOGOCENTRO.webp";
-import LogoCortinas from "../img/cortinas.webp";
+import LogoCortinas from "../img/cortinasSaucedo.webp";
 
 const clients = [
   { name: "CAPAMA", logo: LogoCapama },
   { name: "CE Energy", logo: LogoCe },
-  { name: "Ayuntamiento", logo: LogoAyuntamiento },
-  { name: "Cortinas", logo: LogoCortinas },
+  { name: "H. Ayuntamiento", logo: LogoAyuntamiento },
+  { name: "Cortinas Saucedo", logo: LogoCortinas },
 ];
 
 export const ProjectsSection = () => {
@@ -22,7 +23,7 @@ export const ProjectsSection = () => {
       if (!isHovering) {
         setActiveIndex((prevIndex) => (prevIndex + 1) % clients.length);
       }
-    }, 3000); 
+    }, 3000);
     return () => clearInterval(interval);
   }, [isHovering]);
 
@@ -38,6 +39,7 @@ export const ProjectsSection = () => {
           Empresas Líderes que Confían en Nuestros Servicios
         </motion.h2>
 
+        {/* Carrusel con tarjetas */}
         <div className="relative h-80">
           <div className="flex justify-center items-center h-80">
             <AnimatePresence mode="wait">
@@ -49,38 +51,55 @@ export const ProjectsSection = () => {
                 transition={{ duration: 0.5 }}
                 className="absolute"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  onHoverStart={() => setIsHovering(true)}
-                  onHoverEnd={() => setIsHovering(false)}
-                  className="bg-dark-glass backdrop-blur-lg dark:bg-light-glass dark:backdrop-blur-lg p-2 rounded-2xl shadow-2xl"
+                <Card
+                  isHoverable
+                  isPressable
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="rounded-2xl shadow-lg transition-transform transform hover:scale-105"
+                  style={{
+                    maxWidth: "18rem",
+                    backgroundColor: "var(--nextui-colors-cardBackground)",
+                  }}
                 >
-                  <img
-                    src={clients[activeIndex].logo}
-                    alt={`Logo de ${clients[activeIndex].name}`}
-                    className="w-64 h-64 object-contain"
-                  />
-                </motion.div>
+                  <CardHeader className="flex justify-center items-center">
+                    <Image
+                    isBlurred
+                      src={clients[activeIndex].logo}
+                      alt={`Logo de ${clients[activeIndex].name}`}
+                      className="w-40 h-40 object-contain"
+                    />
+                  </CardHeader>
+                  <CardBody>
+                    <h3 className="text-center font-bold text-lg text-primary">
+                      {clients[activeIndex].name}
+                    </h3>
+                  </CardBody>
+                </Card>
               </motion.div>
             </AnimatePresence>
           </div>
 
+          {/* Botones de selección */}
           <div className="flex justify-center mt-8 space-x-2">
             {clients.map((_, index) => (
               <motion.button
                 key={index}
                 className={`w-3 h-3 rounded-full ${
-                  index === activeIndex ? "bg-light" : "bg-primary"
+                  index === activeIndex
+                    ? "bg-primary"
+                    : "bg-gray-400 dark:bg-gray-600"
                 }`}
                 onClick={() => setActiveIndex(index)}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
-                aria-live="polite" 
+                aria-live="polite"
               />
             ))}
           </div>
         </div>
 
+        {/* Logos de clientes como cuadrícula */}
         <motion.div
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5"
           initial={{ opacity: 0, y: 50 }}
@@ -88,17 +107,21 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {clients.map((client, index) => (
-            <motion.div
+            <Card
               key={index}
-              className="bg-dark-glass backdrop-blur-lg dark:bg-light-glass dark:backdrop-blur-lg p-2 rounded-lg flex items-center justify-center"
-              whileHover={{ scale: 1.05 }}
+              isHoverable
+              className="rounded-lg shadow-md flex items-center justify-center p-4"
+              style={{
+                backgroundColor: "var(--nextui-colors-cardBackground)",
+              }}
             >
-              <img
+              <Image
+              isBlurred
                 src={client.logo}
                 alt={`Logo de ${client.name}`}
                 className="w-24 h-24 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
               />
-            </motion.div>
+            </Card>
           ))}
         </motion.div>
       </div>

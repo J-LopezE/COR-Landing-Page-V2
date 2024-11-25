@@ -37,7 +37,6 @@ export const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(false);
   const { theme } = useTheme();
-  const backgroundColor = theme === "dark" ? "#034aa6" : "#0f6ca7";
 
   const sanitizeInput = (input) => {
     return DOMPurify.sanitize(input);
@@ -75,7 +74,7 @@ export const ContactSection = () => {
       setIsSubmitting(true);
       setAlertMessage("Enviando...");
       setAlertType("info");
-      setShowAlert(true); // Mostrar alerta
+      setShowAlert(true); 
 
       try {
         const response = await fetch(
@@ -117,7 +116,6 @@ export const ContactSection = () => {
     <footer className="text-text py-2 relative overflow-hidden">
       <div className="mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Información de contacto */}
           <motion.div
             variants={fadeIn}
             initial="initial"
@@ -160,7 +158,6 @@ export const ContactSection = () => {
             </ul>
           </motion.div>
 
-          {/* Redes Sociales */}
           <motion.div
             variants={fadeIn}
             initial="initial"
@@ -195,7 +192,6 @@ export const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Formulario de contacto */}
           <motion.div
             variants={fadeIn}
             initial="initial"
@@ -305,7 +301,6 @@ export const ContactSection = () => {
           </motion.div>
         </div>
 
-        {/* Alerta de carga y estado de mensaje */}
         {showAlert && (
           <motion.div
             className={`fixed inset-x-0 bottom-10 mx-auto p-4 w-full max-w-md rounded-lg z-50 mb-40 flex items-center justify-center ${
@@ -347,7 +342,7 @@ export const ContactSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p>&copy; 2024 COR-Computadoras - Todos los derechos reservados.</p>
+          <p>&copy; Todos los derechos reservados © 2018 © COR Computadoras 2024</p>
         </motion.div>
       </div>
     </footer>
