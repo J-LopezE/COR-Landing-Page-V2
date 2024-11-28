@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const items = [
   {
     title: "Transforma tu empresa con COR Computadoras",
-    subtitle: "Soluciones que impulsan el corazón de tu negocio",
+    subtitle: "Soluciones que impulsan el corazón de tu empresa",
     description:
       "En COR Computadoras, ofrecemos soporte técnico y soluciones tecnológicas personalizadas que optimizan tus operaciones y potencian el crecimiento empresarial.",
     image: "/server.webp",

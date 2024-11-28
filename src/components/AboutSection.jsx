@@ -49,7 +49,7 @@ export const AboutSection = () => {
               className="w-full lg:w-2/3 min-h-[350px] flex flex-col justify-between"
             >
               <Card
-                className="rounded-2xl shadow-xl bg-cardBackground text-text  shadow-card dark:bg-cardBackground dark:text-cardText"
+                className="rounded-2xl shadow-xl bg-cardBackground text-cardText  shadow-card dark:bg-cardBackground dark:text-cardText"
                 
               >
                 <CardHeader className="flex justify-center items-center">

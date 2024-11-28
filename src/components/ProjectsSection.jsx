@@ -31,7 +31,7 @@ export const ProjectsSection = () => {
     <AnimatedSection className="py-20">
       <div className="container mx-auto px-4">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-5 text-text"
+          className="text-3xl md:text-4xl font-bold text-center mb-5 text-text "
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -48,30 +48,29 @@ export const ProjectsSection = () => {
                 initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
                 animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                 exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                transition={{ duration: 0.5 }}
-                className="absolute"
+                transition={{ duration: 0.6 }}
+                className="absolute mb-15"
               >
                 <Card
                   isHoverable
                   isPressable
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  className="rounded-2xl shadow-lg transition-transform transform hover:scale-105"
+                  className="rounded-2xl shadow-lg transition-transform transform hover:scale-120 bg-cardBackground mt-5"
                   style={{
-                    maxWidth: "18rem",
-                    backgroundColor: "var(--nextui-colors-cardBackground)",
+                    maxWidth: "15rem",
+                   
                   }}
                 >
-                  <CardHeader className="flex justify-center items-center">
+                  <CardHeader className="flex justify-center items-center mt-4">
                     <Image
-                    isBlurred
                       src={clients[activeIndex].logo}
                       alt={`Logo de ${clients[activeIndex].name}`}
-                      className="w-40 h-40 object-contain"
+                      className="w-50 h-50 object-contain"
                     />
                   </CardHeader>
                   <CardBody>
-                    <h3 className="text-center font-bold text-lg text-primary">
+                    <h3 className="text-center font-bold text-lg text-cardText">
                       {clients[activeIndex].name}
                     </h3>
                   </CardBody>
@@ -81,7 +80,7 @@ export const ProjectsSection = () => {
           </div>
 
           {/* Botones de selección */}
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center mt-8 mb-8 space-x-2">
             {clients.map((_, index) => (
               <motion.button
                 key={index}
@@ -101,7 +100,7 @@ export const ProjectsSection = () => {
 
         {/* Logos de clientes como cuadrícula */}
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5"
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-5"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -110,16 +109,13 @@ export const ProjectsSection = () => {
             <Card
               key={index}
               isHoverable
-              className="rounded-lg shadow-md flex items-center justify-center p-4"
-              style={{
-                backgroundColor: "var(--nextui-colors-cardBackground)",
-              }}
+              className="rounded-lg shadow-md flex items-center justify-center p-4 bg-cardBackground"
+              
             >
               <Image
-              isBlurred
                 src={client.logo}
                 alt={`Logo de ${client.name}`}
-                className="w-24 h-24 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-24 h-24 object-contain "
               />
             </Card>
           ))}
