@@ -43,8 +43,9 @@ export const PartnersSection = () => {
 function PartnerCard({ partner }) {
   return (
 <Card 
+  isHoverable
   className="overflow-hidden group p-6 rounded-lg 
-    bg-cardBackground text-text shadow-card dark:bg-cardBackground dark:text-cardText transition-shadow duration-300"
+     bg-cardBackground  shadow-card  transition-shadow duration-300 backdrop-blur-lg"
 >
       <CardBody className="p-4 h-full flex flex-col justify-between ">
         <motion.div
@@ -59,8 +60,8 @@ function PartnerCard({ partner }) {
             className="w-full h-40 object-contain mb-4"
           />
         </motion.div>
-        <h3 className="text-xl font-semibold text-center text-text mb-2">{partner.name}</h3>
-        <p className="text-sm text-center text-text">
+        <h3 className="text-xl font-semibold text-center text-cardText mb-2">{partner.name}</h3>
+        <p className="text-sm text-center text-cardText">
           {partner.specialties.join(' • ')}
         </p>
       </CardBody>

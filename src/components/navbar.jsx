@@ -61,7 +61,7 @@ export const Navbar = () => {
             <div className="p-2">
               <img
                 src={Logo}
-                alt="Logo"
+                alt="Logo de Cor Computadoras"
                 className="sm:h-40 lg:h-40"
               />
             </div>
@@ -78,40 +78,41 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent>
-        <div className={menuClasses}>
-          {[
-            "inicio",
-            "quiénes somos",
-            "clientes",
-            "servicios",
-            "socios",
-            "contacto",
-          ].map((item) => (
-            <NavbarItem key={item}>
-              <a
-                href={`#${item}`}
-                onClick={(e) => handleSmoothScroll(e, `#${item}`)}
-                className={`relative px-3 py-2 text-sm font-medium ${
-                  location.hash === `#${item}`
-                    ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
-                }`}
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-                {location.hash === `#${item}` && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 w-full bg-blue-600 dark:bg-blue-400"
-                    layoutId="navbar-underline"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </a>
-            </NavbarItem>
-          ))}
-        </div>
-      </NavbarContent>
+  <div className={menuClasses}>
+    {[
+      { id: "inicio", label: "Inicio" },
+      { id: "quiénes-somos", label: "Quiénes somos" },
+      { id: "clientes", label: "Clientes" },
+      { id: "servicios", label: "Servicios" },
+      { id: "socios", label: "Socios" },
+      { id: "contacto", label: "Contacto" },
+    ].map(({ id, label }) => (
+      <NavbarItem key={id}>
+        <a
+          href={`#${id}`}
+          onClick={(e) => handleSmoothScroll(e, `#${id}`)}
+          className={`relative px-3 py-2 text-sm font-medium ${
+            location.hash === `#${id}`
+              ? "text-blue-600 dark:text-blue-400"
+              : "text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+          }`}
+        >
+          {label}
+          {location.hash === `#${id}` && (
+            <motion.div
+              className="absolute bottom-0 left-0 h-0.5 w-full bg-blue-600 dark:bg-blue-400"
+              layoutId="navbar-underline"
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
+            />
+          )}
+        </a>
+      </NavbarItem>
+    ))}
+  </div>
+</NavbarContent>
+
 
       <NavbarItem className="flex items-center">
         <Switch

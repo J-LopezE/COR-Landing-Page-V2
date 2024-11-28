@@ -78,7 +78,7 @@ export const ContactSection = () => {
 
       try {
         const response = await fetch(
-          "https://formsubmit.co/ajax/jorgeisrael.lopez@gmail.com",
+          "https://formsubmit.co/ajax/contacto@corcomputadoras.com",
           {
             method: "POST",
             headers: {
@@ -135,10 +135,10 @@ export const ContactSection = () => {
                 <Mail className="mr-2 h-5 w-5 text-text" />
                 <span>Email:</span>
                 <a
-                  href="mailto:info@techsupport.com"
+                  href="mailto:contacto@corcomputadoras.com"
                   className="ml-2 text-text "
                 >
-                  info@techsupport.com
+                  contacto@corcomputadoras.com
                 </a>
               </li>
               <li className="flex items-center mb-3">
@@ -342,7 +342,7 @@ export const ContactSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p>&copy; Todos los derechos reservados © 2018 © COR Computadoras 2024</p>
+          <p>&copy; Todos los derechos reservados © 2017 © COR Computadoras 2024</p>
         </motion.div>
       </div>
     </footer>
