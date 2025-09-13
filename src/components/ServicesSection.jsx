@@ -1,172 +1,244 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Button,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
+  Chip,
+  Card,
+  CardHeader,
+  CardBody,
 } from "@nextui-org/react";
-import { Laptop, Camera, Code } from "lucide-react";
-import { AnimatedSection } from "./AnimatedSection.jsx";
-
-
-const fadeIn = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeInOut" },
-};
-
-const hoverEffect = {
-  whileHover: { scale: 1.05, transition: { duration: 0.3 } },
-};
+import {
+  Monitor,
+  CheckCircle,
+  Wifi,
+  HardDrive,
+  Shield,
+  Clock,
+} from "lucide-react";
+import { Code } from "react-feather";
 
 export const ServicesSection = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure(); 
-  const [selectedService, setSelectedService] = useState(null);
-
-  const services = [
-    {
-      icon: Laptop,
-      title: "Soporte Técnico Avanzado",
-      description:
-        "Asistencia experta 24/7 para mantener tus sistemas funcionando sin problemas.",
-      fullDescription:
-        "Nuestro equipo de élite está disponible en todo momento para resolver cualquier problema técnico que puedas enfrentar. Utilizamos tecnología de vanguardia para diagnósticos remotos y soluciones rápidas, garantizando que tu negocio nunca se detenga.",
-      color: "from-indigo-500 to-indigo-700", 
-      image: "/placeholder.svg?height=400&width=600",
-    },
-    {
-      icon: Code,
-      title: "Desarrollo de Software Personalizado",
-      description:
-        "Creamos soluciones tecnológicas innovadoras que transforman tu visión en realidad.",
-      fullDescription:
-        "Nuestro equipo de desarrolladores de clase mundial crea software a medida que no solo cumple con tus necesidades actuales, sino que también se adapta a tu crecimiento futuro. Desde aplicaciones móviles hasta sistemas empresariales complejos, hacemos que la tecnología trabaje para ti.",
-      color: "from-teal-500 to-teal-700", 
-      image: "/placeholder.svg?height=400&width=600",
-    },
-    {
-      icon: Camera,
-      title: "Sistemas de Videovigilancia Inteligente",
-      description: "Protección avanzada con IA para hogares y empresas.",
-      fullDescription:
-        "Nuestros sistemas de videovigilancia utilizan inteligencia artificial para ofrecer una seguridad sin precedentes. Detección facial, análisis de comportamiento y alertas en tiempo real te mantienen un paso adelante de cualquier amenaza potencial.",
-      color: "from-gray-600 to-gray-800", 
-      image: "/placeholder.svg?height=400&width=600",
-    },
-  ];
-
-  const ServiceCard = ({ service, onClick, index }) => {
-    const Icon = service.icon;
-    return (
-      <motion.div
-        className="relative overflow-hidden rounded-2xl cursor-pointer group"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-75 group-hover:opacity-90 transition-opacity duration-300`}
-        />
-        <div className="relative p-8 h-full flex flex-col justify-between z-10">
-          <div>
-            <Icon className="w-16 h-16 mb-6" />
-            <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-            <p>{service.description}</p>
-          </div>
-          <motion.div className="mt-6" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }}>
-            <Button
-              onClick={() => onClick()} 
-              className="text-white bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg"
-            >
-              Ver más detalles
-            </Button>
-          </motion.div>
-        </div>
-      </motion.div>
-    );
-  };
-
-  const ServiceModal = ({ service, isOpen, onClose }) => {
-    if (!service) return null;
-
-    const Icon = service.icon;
-
-    return (
-      <Modal backdrop="blur" isOpen={isOpen} onClose={onClose} scroll>
-        <ModalContent>
-          <ModalHeader className="flex flex-col gap-1 text-text">
-            {service.title}
-          </ModalHeader>
-          <ModalBody>
-            <div className="mb-6">
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-64 object-cover rounded-lg"
-              />
-            </div>
-            <p className="text-text text-lg">{service.fullDescription}</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="danger" variant="light" onPress={onClose}>
-              Cerrar
-            </Button>
-            <Button
-              className={`w-1/8 bg-gradient-to-r ${service.color} text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:scale-105`}
-              onClick={() => {
-                window.location.href = "#contacto";
-                onClose();
-              }}
-            >
-              Solicitar este Servicio
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
-  };
-
   return (
-    <section className="py-20 text-white overflow-hidden">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-text">
-          Servicios que Transforman
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              service={service}
-              index={index}
-              onClick={() => {
-                setSelectedService(service);
-                onOpen(); 
-              }}
-            />
-          ))}
-        </div>
-        <div className="mt-16 text-center">
-          <Button
-            size="lg"
-            color="primary"
-            className="hover:scale-105"
-            onClick={() => (window.location.href = "#contacto")}
+    <section id="servicios" className="py-24 bg-white dark:bg-gray-950">
+      <div className="max-w-8xl mx-auto px-6 lg:px-12">
+        <div className="text-center space-y-6 mb-20">
+          <Chip
+            className="bg-blue-100 text-blue-800 px-6 py-3 text-lg dark:bg-blue-900 dark:text-blue-300"
+            variant="flat"
           >
-            Contáctanos Ahora
-          </Button>
+            Nuestros Servicios
+          </Chip>
+          <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white max-w-4xl mx-auto leading-tight">
+            Soluciones Tecnológicas
+            <span className="text-blue-600"> Completas</span>
+          </h2>
+          <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Ofrecemos una amplia gama de servicios especializados para mantener
+            tu tecnología funcionando perfectamente
+          </p>
+        </div>
+
+        {/* Grid optimizado para pantallas ultra-wide */}
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 gap-8">
+          <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-800 dark:to-blue-950/30 dark:shadow-xl">
+            <CardHeader className="pb-4 flex flex-col items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Monitor className="h-8 w-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold">Reparación de PC</h3>
+              <p className="text-gray-600 text-start">
+                Diagnóstico y reparación completa de computadoras de escritorio
+                y portátiles
+              </p>
+            </CardHeader>
+            <CardBody>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Diagnóstico gratuito</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Reparación de hardware</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Instalación de software</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Limpieza interna</span>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
+
+          <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-green-50/30 dark:from-gray-800 dark:to-green-950/30 dark:shadow-xl">
+            <CardHeader className="pb-4 flex flex-col items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Code className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold">Desarrollo de Software</h3>
+              <p className="text-gray-600 text-start">
+                Sistemas y aplicaciones personalizados para tu empresa.
+              </p>
+            </CardHeader>
+            <CardBody>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-blue-500" />
+                  <span>Desarrollo de sistemas a medida</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-blue-500" />
+                  <span>Diseño y programación de sitios web</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-blue-500" />
+                  <span>Landing pages de alto impacto</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-blue-500" />
+                  <span>Integraciones y soluciones personalizadas</span>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
+
+          <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/30 dark:from-gray-800 dark:to-purple-950/30 dark:shadow-xl">
+            {" "}
+            <CardHeader className="pb-4 flex flex-col items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Wifi className="h-8 w-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold">Redes y Conectividad</h3>
+              <p className="text-gray-600 text-start">
+                Instalación y configuración de redes domésticas y empresariales
+              </p>
+            </CardHeader>
+            <CardBody>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Instalación de redes WiFi</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Configuración de routers</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Cableado estructurado</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Seguridad de red</span>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
+
+          <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-orange-50/30 dark:from-gray-800 dark:to-orange-950/30 dark:shadow-xl">
+            {" "}
+            <CardHeader className="pb-4 flex flex-col items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <HardDrive className="h-8 w-8 text-orange-600" />
+              </div>
+              <h3 className="text-xl font-bold">Recuperación de Datos</h3>
+              <p className="text-gray-600 text-start">
+                Recuperación profesional de información perdida o dañada
+              </p>
+            </CardHeader>
+            <CardBody>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Discos duros dañados</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Memorias USB</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Tarjetas SD</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Respaldo de datos</span>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
+
+          <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-red-50/30 dark:from-gray-800 dark:to-red-950/30 dark:shadow-xl">
+            {" "}
+            <CardHeader className="pb-4 flex flex-col items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Shield className="h-8 w-8 text-red-600" />
+              </div>
+              <h3 className="text-xl font-bold">Seguridad Informática</h3>
+              <p className="text-gray-600 text-start">
+                Protección contra virus, malware y amenazas digitales
+              </p>
+            </CardHeader>
+            <CardBody>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Eliminación de virus</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Instalación de antivirus</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Configuración de firewall</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Auditorías de seguridad</span>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
+
+          <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg bg-gradient-to-br from-white to-teal-50/30 dark:from-gray-800 dark:to-teal-950/30 dark:shadow-xl">
+            {" "}
+            <CardHeader className="pb-4 flex flex-col items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Clock className="h-8 w-8 text-teal-600" />
+              </div>
+              <h3 className="text-xl font-bold">Mantenimiento Preventivo</h3>
+              <p className="text-gray-600 text-start">
+                Mantenimiento regular para prevenir fallas y optimizar
+                rendimiento
+              </p>
+            </CardHeader>
+            <CardBody>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Limpieza profunda</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Actualización de software</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Optimización del sistema</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Planes de mantenimiento</span>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
         </div>
       </div>
-
-      <ServiceModal
-        service={selectedService}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
     </section>
   );
 };

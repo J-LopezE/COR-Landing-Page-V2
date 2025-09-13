@@ -8,39 +8,87 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
+   prefix: "",
+ theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
+      maxWidth: {
+        "8xl": "88rem",
+        "9xl": "96rem",
+      },
+      screens: {
+        ultrawide: "2560px",
+        "4k": "3840px",
+      },
       colors: {
-        light: {
-          primary: "#0077B6", // Azul moderno
-          secondary: "#00B4D8", // Verde menta
-          background: "#f0f4f8", // Fondo gris claro
-          cardBackground: "rgba(255, 255, 255, 0.10)", // Fondo blanco translúcido (cristal templado)
-          cardHover: "#f7fafc", // Hover gris claro para contraste
-          cardBorder: "#e2e8f0", // Borde gris suave para distinción
-          cardShadow: "rgba(0, 0, 0, 0.1)", // Sombra suave
-          cardText: "#1a202c", // Texto oscuro
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--foreground))",
         },
-        dark: {
-          primary: "#034aa6", // Azul clásico
-          secondary: "#0f6ca7", // Azul más claro
-          background: "#011F3F", // Fondo oscuro
-          cardBackground: "rgba(26, 58, 92, 0.9)", // Fondo azul oscuro translúcido (cristal templado)
-          cardHover: "#213d5a", // Hover azul más claro
-          cardBorder: "#2a4365", // Borde azul grisáceo para separar
-          cardShadow: "rgba(0, 0, 0, 0.25)", // Sombra más profunda en el modo oscuro
-          cardText: "#cbd5e0", // Texto claro para buen contraste
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
-      fontFamily: {
-        sans: ["Inter", "Helvetica", "Arial", "sans-serif"], // Fuente moderna y limpia
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
-      spacing: {
-        128: "18rem", // Espaciado más grande
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-in-from-bottom": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
       },
-      boxShadow: {
-        custom: "0 4px 12px rgba(0, 0, 0, 0.1)", // Sombra personalizada para los cards
-        card: "0 4px 8px rgba(0, 0, 0, 0.1)", // Sombra más suave para cards
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "slide-in-from-bottom-5": "slide-in-from-bottom 0.3s ease-out",
       },
     },
   },

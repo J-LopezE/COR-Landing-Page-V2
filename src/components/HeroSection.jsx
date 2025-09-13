@@ -1,120 +1,133 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image } from "@nextui-org/react";
+import { Button, Image, Chip, Card, CardBody } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Zap, ArrowRight, CheckCircle, Award } from "lucide-react";
 
 // Datos del carrusel
-const items = [
-  {
-    title: "Transforma tu empresa con COR Computadoras",
-    subtitle: "Soluciones que impulsan el corazón de tu empresa",
-    description:
-      "En COR Computadoras, ofrecemos soporte técnico y soluciones tecnológicas personalizadas que optimizan tus operaciones y potencian el crecimiento empresarial.",
-    image: "/server.webp",
-  },
-  {
-    title: "Soporte Técnico Profesional",
-    subtitle: "Mantén tus sistemas funcionando sin interrupciones",
-    description:
-      "Nuestro equipo experto garantiza un soporte técnico confiable, minimizando tiempos de inactividad y asegurando la continuidad operativa de tus sistemas en todo momento.",
-    image: "/network.webp",
-  },
-  {
-    title: "Desarrollo de Software a Medida",
-    subtitle: "Innovación tecnológica adaptada a tus necesidades",
-    description:
-      "Diseñamos soluciones de software personalizadas que mejoran la productividad, automatizan procesos y se ajustan a los objetivos específicos de tu empresa.",
-    image: "/developer.webp",
-  },
-  {
-    title: "Cámaras de Vigilancia Inteligentes",
-    subtitle: "Seguridad avanzada para proteger lo que más importa",
-    description:
-      "Ofrecemos soluciones de vigilancia modernas con cámaras de alta definición, proporcionando monitoreo continuo y acceso remoto para hogares y negocios.",
-    image: "/camera.webp",
-  },
-];
 
 export const HeroSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Carrusel automático
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 7000); 
-    return () => clearInterval(interval); 
-  }, []);
-
   return (
-    <section className="relative  h-auto gap-10 py-10 sm:py-20 md:py-28">
-      <div className="container mx-auto px-4 sm:px-5 mb-10 gap-20">
-        <div className="flex flex-col md:flex-row items-center mb-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-              className="md:w-1/2 space-y-4 text-text px-2 sm:px-4"
-            >
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-montserrat text-center md:text-left">
-                {items[currentIndex].title}
-              </h1>
-              <h2 className="text-lg sm:text-xl italic mb-8 font-open-sans text-center md:text-left">
-                {items[currentIndex].subtitle}
-              </h2>
-              <p className="text-base sm:text-lg mb-6 font-open-sans text-justify max-w-prose mx-auto sm:mx-0">
-                {items[currentIndex].description}
-              </p>
-              <div className="text-center md:text-left">
-                <Button
-                  color="primary"
-                  onClick={() => (window.location.href = "#servicios")}
-                  className="bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300"
-                >
-                  Descubre Más
-                </Button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+    <section
+      id="inicio"
+      className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden dark:from-gray-900 dark:via-blue-950 dark:to-indigo-950"
+    >
+      {/* Elementos decorativos */}
+      <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 rounded-full opacity-20 animate-pulse" />
+      <div className="absolute top-1/2 -left-40 w-60 h-60 bg-indigo-200 rounded-full opacity-20 animate-pulse delay-1000" />
+      <div className="absolute bottom-20 right-1/4 w-40 h-40 bg-purple-200 rounded-full opacity-20 animate-pulse delay-2000" />
 
-          {/* Imagen del carrusel */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.5 }}
-              className="md:w-1/2 mt-10 md:mt-0 flex justify-center"
+      <div className="max-w-8xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-center mt-8">
+          {/* Texto principal */}
+          <div className="lg:col-span-7 space-y-8">
+            <Chip
+              variant="flat"
+              className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-blue-200 px-4 py-2 dark:from-blue-900 dark:to-indigo-900 dark:text-blue-300 dark:border-blue-700"
+              startContent={<Zap className="w-4 h-4" />}
             >
-              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
-                <div className="absolute inset-0 rounded-lg filter blur-2xl transform rotate-6 "></div>
-                <Image
-                  isZoomed
-                  src={items[currentIndex].image}
-                  alt={`${items[currentIndex].title} - COR Computadoras`}
-                  className="rounded-lg"
-                  style={{ maxWidth: "100%", maxHeight: "300px" }}
-                />
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              Más de 8 años de experiencia
+            </Chip>
+
+            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white leading-tight">
+              Expertos en
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent block">
+                Tecnología
+              </span>
+              <span className="text-4xl lg:text-5xl xl:text-6xl text-gray-700 dark:text-gray-300 font-light">
+                y Computación
+              </span>
+            </h1>
+
+            <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+              Soluciones tecnológicas integrales para hogares y empresas.
+              Reparación, mantenimiento y venta de equipos de cómputo con
+              garantía y soporte especializado.
+            </p>
+
+            {/* Botones */}
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 px-8 py-4 text-lg"
+                endContent={<ArrowRight className="ml-2 h-5 w-5" />}
+              >
+                <a href="#servicios">Ver Servicios</a>
+              </Button>
+              <Button
+                size="lg"
+                variant="bordered"
+                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 bg-white/80 backdrop-blur-sm shadow-lg px-8 py-4 text-lg dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900 dark:bg-gray-800/80"
+              >
+                <a href="#contacto">Cotización Gratuita</a>
+              </Button>
+            </div>
+
+            {/* Estadísticas */}
+            <div className="grid grid-cols-3 gap-8 pt-8">
+              {[
+                {
+                  value: "100+",
+                  label: "Clientes Satisfechos",
+                  color: "text-blue-600",
+                },
+                {
+                  value: "8+",
+                  label: "Años de Experiencia",
+                  color: "text-green-600",
+                },
+                {
+                  value: "24/7",
+                  label: "Soporte Técnico",
+                  color: "text-purple-600",
+                },
+              ].map((stat, i) => (
+                <div key={i} className="text-center group">
+                  <div
+                    className={`text-4xl lg:text-5xl font-bold ${stat.color} group-hover:scale-110 transition-transform`}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-sm lg:text-base text-gray-600 font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Imagen principal */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative z-10 transform hover:scale-105 transition-transform duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
+              <Image
+                src="./public/server.webp"
+                alt="Técnico especializado reparando computadora"
+                className="rounded-3xl shadow-2xl border border-white/20"
+              />
+            </div>
+
+            {/* Etiquetas flotantes */}
+            <Card className="absolute top-10 -left-6 shadow-xl animate-bounce">
+              <CardBody className="flex items-center space-x-3 p-4">
+                <CheckCircle className="h-8 w-8 text-green-500" />
+                <div>
+                  <div className="font-semibold text-gray-900">Diagnóstico</div>
+                  <div className="text-sm text-gray-600">Gratuito</div>
+                </div>
+              </CardBody>
+            </Card>
+
+            <Card className="absolute bottom-10 -right-6 shadow-xl animate-bounce delay-1000">
+              <CardBody className="flex items-center space-x-3 p-4">
+                <Award className="h-8 w-8 text-blue-500" />
+                <div>
+                  <div className="font-semibold text-gray-900">Garantía</div>
+                  <div className="text-sm text-gray-600">Asegurada</div>
+                </div>
+              </CardBody>
+            </Card>
+          </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-3">
-        {items.map((_, index) => (
-          <button
-            key={index}
-            className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? "bg-blue-600" : "bg-blue-300"
-            } transition-all duration-300`}
-            onClick={() => setCurrentIndex(index)}
-            aria-label={`Ir a la diapositiva ${index + 1}`}
-          />
-        ))}
       </div>
     </section>
   );

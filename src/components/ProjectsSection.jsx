@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardHeader, CardBody, Image} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image, Chip} from "@nextui-org/react";
 import { AnimatedSection } from "./AnimatedSection.jsx";
 import LogoCapama from "../img/capama_r.webp";
 import LogoCe from "../img/ceenergy.webp";
@@ -28,99 +28,83 @@ export const ProjectsSection = () => {
   }, [isHovering]);
 
   return (
-    <AnimatedSection className="py-20">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-5 text-text "
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Empresas Líderes que Confían en Nuestros Servicios
-        </motion.h2>
-
-        {/* Carrusel con tarjetas */}
-        <div className="relative h-80">
-          <div className="flex justify-center items-center h-80">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                transition={{ duration: 0.6 }}
-                className="absolute mb-15"
-              >
-                <Card
-                  isHoverable
-                  isPressable
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                  className="rounded-2xl shadow-lg transition-transform transform hover:scale-120 bg-cardBackground mt-5"
-                  style={{
-                    maxWidth: "15rem",
-                   
-                  }}
-                >
-                  <CardHeader className="flex justify-center items-center mt-4">
-                    <Image
-                      src={clients[activeIndex].logo}
-                      alt={`Logo de ${clients[activeIndex].name}`}
-                      className="w-50 h-50 object-contain"
-                    />
-                  </CardHeader>
-                  <CardBody>
-                    <h3 className="text-center font-bold text-lg text-cardText">
-                      {clients[activeIndex].name}
-                    </h3>
-                  </CardBody>
-                </Card>
-              </motion.div>
-            </AnimatePresence>
+      <section
+        id="clientes"
+        className="py-24 bg-gradient-to-br from-gray-50 to-blue-50/30 dark:from-gray-900 dark:to-blue-950/30"
+      >
+        <div className="max-w-8xl mx-auto px-6 lg:px-12">
+          <div className="text-center space-y-6 mb-20">
+            <Chip className="bg-purple-100 text-purple-800 px-6 py-3 text-lg dark:bg-purple-900 dark:text-purple-300">
+              Nuestros Clientes
+            </Chip>
+            <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white max-w-4xl mx-auto leading-tight">
+              Confían en
+              <span className="text-purple-600 dark:text-purple-400"> Nuestra Experiencia</span>
+            </h2>
+            <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Hemos tenido el privilegio de trabajar con diversas empresas y particulares, brindando soluciones
+              tecnológicas de alta calidad.
+            </p>
           </div>
 
-          {/* Botones de selección */}
-          <div className="flex justify-center mt-8 mb-8 space-x-2">
-            {clients.map((_, index) => (
-              <motion.button
-                key={index}
-                className={`w-3 h-3 rounded-full ${
-                  index === activeIndex
-                    ? "bg-primary"
-                    : "bg-gray-400 dark:bg-gray-600"
-                }`}
-                onClick={() => setActiveIndex(index)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                aria-live="polite"
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 items-center justify-center">
+            {/* Placeholder Logos */}
+            <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+              <Image
+                src="../../src/img/capama_r.webp"
+                alt="Logo Empresa A"
+                width={150}
+                height={80}
+                className="object-contain h-20 w-full dark:invert"
               />
-            ))}
+            </div>
+            <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+              <Image
+                src="../../src/img/ceenergy.webp"
+                alt="Logo Empresa B"
+                width={150}
+                height={80}
+                className="object-contain h-20 w-full dark:invert"
+              />
+            </div>
+            <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+              <Image
+                src="../../src/img/LOGOCENTRO.webp"
+                alt="Logo Empresa C"
+                width={150}
+                height={80}
+                className="object-contain h-20 w-full dark:invert"
+              />
+            </div>
+            <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+              <Image
+                src="../../src/img/cortinasSaucedo.webp"
+                alt="Logo Empresa D"
+                width={150}
+                height={80}
+                className="object-contain h-20 w-full dark:invert"
+              />
+            </div>
+            <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+              <Image
+                src="../../src/img/crissadata.webp"
+                alt="Logo Empresa E"
+                width={150}
+                height={80}
+                className="object-contain h-20 w-full dark:invert"
+              />
+            </div>
+            <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+              <Image
+                src="../../src/img/lupuztech.webp"
+                alt="Logo Empresa F"
+                width={150}
+                height={80}
+                className="object-contain h-20 w-full dark:invert"
+              />
+            </div>
           </div>
         </div>
-
-        {/* Logos de clientes como cuadrícula */}
-        <motion.div
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-5"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {clients.map((client, index) => (
-            <Card
-              key={index}
-              isHoverable
-              className="rounded-lg shadow-md flex items-center justify-center p-4 bg-cardBackground"
-              
-            >
-              <Image
-                src={client.logo}
-                alt={`Logo de ${client.name}`}
-                className="w-24 h-24 object-contain "
-              />
-            </Card>
-          ))}
-        </motion.div>
-      </div>
-    </AnimatedSection>
+      </section>
   );
 };
